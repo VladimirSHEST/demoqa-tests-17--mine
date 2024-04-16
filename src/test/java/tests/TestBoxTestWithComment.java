@@ -1,7 +1,6 @@
-package demoqa;
+package tests;
 
 import com.codeborne.selenide.Configuration;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
@@ -11,29 +10,27 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationWithPageObjectTest {
-    RegistrationPage registrationPage = new RegistrationPage();
+public class TestBoxTestWithComment {
+    private String byText;
+
     @BeforeAll
     static void beForeAll() {
 //        Configuration.holdBrowserOpen = true;
 //        Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
     }
-
     @Test
     void FillFormTest() {
         String userName = "Vova";
         Configuration.pageLoadTimeout = 45000;
 
-        registrationPage.openPage();
-        registrationPage.setFirstName(userName);
-        registrationPage.setLastName("Shest");
-        registrationPage.setEmail("piterskiyvv@mail.ru");
-        registrationPage.setGender("//label[@for='gender-radio-1']");
-        registrationPage.setNumber("1234567890");
+        open("/automation-practice-form");
+        $(".text-center").shouldHave(text("Practice Form"));
 
-
-
+        $x("//input[@placeholder='First Name']").setValue(userName);
+        $x("//input[@placeholder='Last Name']").setValue("Shest");
+        $x("//input[@id='userEmail']").setValue("piterskiyvv@mail.ru");
+        $x("//label[@for='gender-radio-1']").click(); // гендер
         $x("//input[@placeholder='Mobile Number']").setValue("1234567890");  // номер
         $x("//input[@id='subjectsInput']").setValue("Maths").pressEnter();  // предметы
         $x("//label[@for='hobbies-checkbox-1']").click();  // хобби
@@ -62,6 +59,7 @@ public class RegistrationWithPageObjectTest {
         $(".modal-content").should(appear); // перевод-элемент должен появиться
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));  // проверка появления формы
 
-        $(".table-responsive").shouldHave(text(userName), text("Shest"), text("piterskiyvv@mail.ru"));  //  проверка заполнения таблицы
+        $(".table-responsive").shouldHave(text(userName),text("Shest"),text("piterskiyvv@mail.ru"));  //  проверка заполнения таблицы
     }
 }
+

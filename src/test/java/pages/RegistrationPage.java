@@ -13,33 +13,40 @@ public class RegistrationPage {
             firstName = $x("//input[@placeholder='First Name']");
 
 
-    public void openPage() {
+    public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".text-center").shouldHave(text(TITLE_TEXT));
+        return this;
 
     }
 
-    public void setFirstName(String value) {
+    public RegistrationPage setFirstName(String value) {
         firstName.setValue(value);
+        return this;
     }
 
-    public void setLastName(String value) {
+    public RegistrationPage setLastName(String value) {
         lastNameInput.setValue(value);
+        return this;
     }
 
-    public void clearLastName() {
+    public RegistrationPage clearLastName() {
         lastNameInput.clear();
+        return this;
     }
 
-    public void setEmail(String value) {
+    public RegistrationPage setEmail(String value) {
         $x("//input[@id='userEmail']").setValue(value);
+        return this;
     }
 
-    public void setGender(String value) {
+    public RegistrationPage setGender(String value) {
         $x(value).click();
+        return this;
     }
 
-    public void setNumber(String value) {
+    public RegistrationPage setNumber(String value) {
         $x("//input[@placeholder='Mobile Number']").setValue(value);
+        return this;
     }
 }
