@@ -5,21 +5,15 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
+import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationWithPageObjectTest {
-    RegistrationPage registrationPage = new RegistrationPage();
+public class RegistrationWithPageObjectTest extends TestBase {
 
-    @BeforeAll
-    static void beForeAll() {
-//        Configuration.holdBrowserOpen = true;
-//        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-    }
 
     @Test
     void FillFormTest() {
@@ -29,20 +23,12 @@ public class RegistrationWithPageObjectTest {
         registrationPage.openPage().setFirstName(userName)
                 .setLastName("Shest").setEmail("piterskiyvv@mail.ru")
                 .setGender("//label[@for='gender-radio-1']")
-                .setNumber("1234567890");
+                .setNumber("1234567890").setBirthDay();
 
 
-        $x("//input[@placeholder='Mobile Number']").setValue("1234567890");  // номер
         $x("//input[@id='subjectsInput']").setValue("Maths").pressEnter();  // предметы
         $x("//label[@for='hobbies-checkbox-1']").click();  // хобби
         $x("//textarea[@placeholder='Current Address']").setValue("Samara");   // адрес
-
-        $x("//input[@id='dateOfBirthInput']").click();
-        $x("//select[@class='react-datepicker__year-select']").click();
-        $x("//option[@value='1989']").click();
-        $x("//select[@class='react-datepicker__month-select']").click();
-        $x("//option[@value='5']").click();
-        $x("//div[@class='react-datepicker__day react-datepicker__day--019']").click();
 
 //      штат и город
         $x("//div[@class=' css-1wa3eu0-placeholder']").click();  // клик по кнопке для выпадения
@@ -55,7 +41,7 @@ public class RegistrationWithPageObjectTest {
         // вставка файла
         $x("//input[@id='uploadPicture']").uploadFromClasspath("img/1.png");
 
-        $("#submit").click();     // утверждение
+        $("#submit").click();     // рассмотрение
 
         $(".modal-content").should(appear); // перевод-элемент должен появиться
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));  // проверка появления формы

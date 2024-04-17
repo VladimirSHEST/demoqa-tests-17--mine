@@ -1,11 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
+    CalendarComponent calendarComponent = new CalendarComponent();
     private final String TITLE_TEXT = "Practice Form";
 
     private SelenideElement
@@ -47,6 +49,12 @@ public class RegistrationPage {
 
     public RegistrationPage setNumber(String value) {
         $x("//input[@placeholder='Mobile Number']").setValue(value);
+        return this;
+    }
+
+    public RegistrationPage setBirthDay() {
+        $x("//input[@id='dateOfBirthInput']").click();
+        calendarComponent.setDate();
         return this;
     }
 }
