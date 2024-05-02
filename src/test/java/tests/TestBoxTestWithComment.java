@@ -1,27 +1,22 @@
-package demoqa;
+package tests;
 
 import com.codeborne.selenide.Configuration;
-
-import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
+import pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
-public class TextBoxTests {
+public class TestBoxTestWithComment {
     private String byText;
 
     @BeforeAll
     static void beForeAll() {
-        Configuration.holdBrowserOpen = true;
-        Configuration.browserSize = "1920x1080";
+//        Configuration.holdBrowserOpen = true;
+//        Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
     }
     @Test
@@ -67,3 +62,4 @@ public class TextBoxTests {
         $(".table-responsive").shouldHave(text(userName),text("Shest"),text("piterskiyvv@mail.ru"));  //  проверка заполнения таблицы
     }
 }
+
