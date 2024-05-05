@@ -66,7 +66,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setHobbies() {
-        $x("//label[@for='hobbies-checkbox-11']").click();
+        $x("//label[@for='hobbies-checkbox-1']").click();
         return this;
     }
 
