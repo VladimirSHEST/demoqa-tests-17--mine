@@ -8,6 +8,7 @@ import tests.faker.RegistrationPageForFaker;
 
 public class TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
+    TestData testData = new TestData();
 
 
     @BeforeAll

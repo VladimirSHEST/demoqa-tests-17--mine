@@ -8,7 +8,7 @@ import tests.TestBase;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationPage extends TestBase{
+public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
     public RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private final String TITLE_TEXT = "Practice Form";
@@ -106,7 +106,7 @@ public class RegistrationPage extends TestBase{
         return this;
     }
 
-    public void verifyTable() {    //  проверка заполнения таблицы
-        $(".table-responsive").shouldHave(text("Vova"), text("Shest"), text("piterskiyvv@mail.ru"));
+    public void verifyTable(String name, String lastName) {    //  проверка заполнения таблицы
+        $(".table-responsive").shouldHave(text(name), text(lastName), text("piterskiyvv@mail.ru"));
     }
 }
