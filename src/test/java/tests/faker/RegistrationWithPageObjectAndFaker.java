@@ -1,29 +1,30 @@
-package tests;
+package tests.faker;
 
 import com.codeborne.selenide.Configuration;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 import static utils.RandomUtils.randomString;
 
-public class RegistrationWithJavaFaker extends TestBase{
+public class RegistrationWithPageObjectAndFaker extends TestBaseFaker{
+
     @Test
     void FillFormTest() {
-        String userName = randomString(10);
-        Configuration.pageLoadTimeout = 45000;
 
-        registrationPage.openPage().setFirstName(userName)
+        Configuration.pageLoadTimeout = 55000;
+
+        registrationPageForFaker.openPage().setFirstNameInpun(firstNameFaker)
                 .setLastName("Shest").setEmail("piterskiyvv@mail.ru")
                 .setGender().setNumber("1234567890").setBirthDay().setSubject()
                 .setHobbies().setAddress().setCity().setUploadPicture()
                 .setSubmit();
 
-        registrationPage.verifyResultsModalAppear()
-                .verifyResult("Student Name", "Vova Shest")
+        registrationPageForFaker.verifyResultsModalAppear()
+                .verifyResult("Student Name", firstNameFaker +" Shest")
                 .verifyResult("Student Email", "piterskiyvv@mail.ru")
                 .verifyResult("Subjects", "Maths")
                 .verifyResult("Address", "Samara").setCity();
 
-        registrationPage.verifyTable();
+        registrationPageForFaker.verifyTable(firstNameFaker);
     }
-
 }
