@@ -8,7 +8,7 @@ import tests.TestBase;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationPage extends TestBase{
+public class RegistrationPage{
     CalendarComponent calendarComponent = new CalendarComponent();
     public RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private final String TITLE_TEXT = "Practice Form";
