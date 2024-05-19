@@ -1,14 +1,15 @@
-package pages;
+package tests.faker;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultsModal;
-import tests.TestBase;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 
-public class RegistrationPage {
+public class RegistrationPageForFaker {
+
     CalendarComponent calendarComponent = new CalendarComponent();
     public RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private final String TITLE_TEXT = "Practice Form";
@@ -18,64 +19,64 @@ public class RegistrationPage {
             firstNameInpun = $x("//input[@placeholder='First Name']");
 
 
-    public RegistrationPage openPage() {
+    public RegistrationPageForFaker openPage() {
         open("/automation-practice-form");
         $(".text-center").shouldHave(text(TITLE_TEXT));
         return this;
     }
 
-    public RegistrationPage setFirstNameInpun(String value) {
+    public RegistrationPageForFaker setFirstNameInpun(String value) {
         firstNameInpun.setValue(value);
         return this;
     }
 
-    public RegistrationPage setLastName(String value) {
+    public RegistrationPageForFaker setLastName(String value) {
         lastNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPage clearLastName() {
+    public RegistrationPageForFaker clearLastName() {
         lastNameInput.clear();
         return this;
     }
 
-    public RegistrationPage setEmail(String value) {
+    public RegistrationPageForFaker setEmail(String value) {
         $x("//input[@id='userEmail']").setValue(value);
         return this;
     }
 
-    public RegistrationPage setGender() {
+    public RegistrationPageForFaker setGender() {
         $x("//label[@for='gender-radio-1']").click();
         return this;
     }
 
-    public RegistrationPage setNumber(String value) {
+    public RegistrationPageForFaker setNumber(String value) {
         $x("//input[@placeholder='Mobile Number']").setValue(value);
         return this;
     }
 
-    public RegistrationPage setBirthDay() {
+    public RegistrationPageForFaker setBirthDay() {
         $x("//input[@id='dateOfBirthInput']").click();
         calendarComponent.setDate();
         return this;
     }
 
-    public RegistrationPage setSubject() {    // хобби
+    public RegistrationPageForFaker setSubject() {    // хобби
         $x("//input[@id='subjectsInput']").setValue("Maths").pressEnter();
         return this;
     }
 
-    public RegistrationPage setHobbies() {
+    public RegistrationPageForFaker setHobbies() {
         $x("//label[@for='hobbies-checkbox-1']").click();
         return this;
     }
 
-    public RegistrationPage setAddress() {     // адрес
+    public RegistrationPageForFaker setAddress() {     // адрес
         $x("//textarea[@placeholder='Current Address']").setValue("Samara");
         return this;
     }
 
-    public RegistrationPage setCity() {     //  штат и город
+    public RegistrationPageForFaker setCity() {     //  штат и город
 //        $x("//div[@class=' css-1wa3eu0-placeholder']").click();  // клик по кнопке для выпадения
 //        $("#stateCity-wrapper").$(byText("NCR")).click();   // клик по тексту через общий див
 //        $x("//div[text()='Select City']").click();  // клик по кнопке для выпадения
@@ -85,28 +86,28 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setUploadPicture() {    // вставка файла
+    public RegistrationPageForFaker setUploadPicture() {    // вставка файла
         $x("//input[@id='uploadPicture']").uploadFromClasspath("img/1.png");
         return this;
     }
 
-    public RegistrationPage setSubmit() {  // рассмотрение
+    public RegistrationPageForFaker setSubmit() {  // рассмотрение
         $("#submit").click();
         return this;
     }
 
 
-    public RegistrationPage verifyResultsModalAppear() {
+    public RegistrationPageForFaker verifyResultsModalAppear() {
         registrationResultsModal.verifyModalAppear();
         return this;
     }
 
-    public RegistrationPage verifyResult(String key, String value) {
+    public RegistrationPageForFaker verifyResult(String key, String value) {
         registrationResultsModal.verifyResult(key, value);
         return this;
     }
 
-    public void verifyTable(String name, String lastName) {    //  проверка заполнения таблицы
-        $(".table-responsive").shouldHave(text(name), text(lastName), text("piterskiyvv@mail.ru"));
+    public void verifyTable(String name) {    //  проверка заполнения таблицы
+        $(".table-responsive").shouldHave(text(name), text("Shest"), text("piterskiyvv@mail.ru"));
     }
 }
