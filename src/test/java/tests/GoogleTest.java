@@ -1,7 +1,11 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Step;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +18,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
+import static io.qameta.allure.Allure.step;
 
 
 public class GoogleTest {
@@ -32,12 +37,21 @@ public class GoogleTest {
         ));
         Configuration.browserCapabilities = capabilities;
     }
+    @BeforeEach
+    void addListener(){
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
 
     @Test
     @Tag("remote")
     void openGoogle(){
-        open("https://www.google.ru/?hl=ru");
-        $("body").shouldHave(text("Google"));
+        step("Открываем сайт", () -> {
+            open("https://www.google.ru/?hl=ru");
+        });
+        step("Проверка", () -> {
+            $("body").shouldHave(text("Google"));
+        });
+
     }
 //
 //    @Test
