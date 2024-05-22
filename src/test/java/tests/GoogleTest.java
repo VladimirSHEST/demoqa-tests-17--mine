@@ -2,12 +2,10 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.Attach;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -41,6 +39,12 @@ public class GoogleTest {
     void addListener(){
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
+    @AfterEach
+    void addAttachments(){
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+    }
 
     @Test
     @Tag("remote")
@@ -51,7 +55,6 @@ public class GoogleTest {
         step("Проверка", () -> {
             $("body").shouldHave(text("Google"));
         });
-
     }
 //
 //    @Test
