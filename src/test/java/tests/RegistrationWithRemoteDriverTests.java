@@ -16,7 +16,6 @@ public class RegistrationWithRemoteDriverTests {
     static void beForeAll() {
 //        Configuration.holdBrowserOpen = true;
 //        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/#/wd/hub";
     }
     @Test
@@ -24,7 +23,7 @@ public class RegistrationWithRemoteDriverTests {
         String userName = "Vova";
         Configuration.pageLoadTimeout = 45000;
 
-        open("/automation-practice-form");
+        open("https://demoqa.com/automation-practice-form");
         $(".text-center").shouldHave(text("Practice Form"));
 
         $x("//input[@placeholder='First Name']").setValue(userName);
