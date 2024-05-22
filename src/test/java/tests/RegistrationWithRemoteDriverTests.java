@@ -21,7 +21,7 @@ public class RegistrationWithRemoteDriverTests {
     @Test
     void FillFormTest() {
         String userName = "Vova";
-        Configuration.pageLoadTimeout = 45000;
+        Configuration.pageLoadTimeout = 55000;
 
         open("https://demoqa.com/automation-practice-form");
         $(".text-center").shouldHave(text("Practice Form"));
