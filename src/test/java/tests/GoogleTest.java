@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
@@ -14,18 +15,21 @@ import java.util.Map;
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 import static io.qameta.allure.Allure.step;
+import static org.openqa.selenium.By.linkText;
 
 
 public class GoogleTest {
+    private static final String REPOSITORY = "eroshenkoam/allure-example";
     @BeforeAll
     static void beForeAll() {
 //        Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1920x1080";
-        Configuration.browser = "firefox";
-        Configuration.browserVersion = "122.0";
+        Configuration.browser = "chrome";
+        Configuration.browserVersion = "100.0";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -55,50 +59,44 @@ public class GoogleTest {
         step("Проверка", () -> {
             $("body").shouldHave(text("Google"));
         });
+        open("https://www.google.ru/?hl=ru");
+        open("https://vk.com/");
+        open("https://www.google.ru/?hl=ru");
+        open("https://www.google.ru/?hl=ru");
+        open("https://vk.com/");
+        open("https://www.google.ru/?hl=ru");
+        open("https://www.google.ru/?hl=ru");
     }
-//
-//    @Test
-//    @Tag("remote")
-//    void FillFormTest() {
-//
-//        String userName = "Vova";
-//        Configuration.pageLoadTimeout = 55000;
-//
-//        open("https://demoqa.com/automation-practice-form");
-//        $(".text-center").shouldHave(text("Practice Form"));
-//
-//        $x("//input[@placeholder='First Name']").setValue(userName);
-//        $x("//input[@placeholder='Last Name']").setValue("Shest");
-//        $x("//input[@id='userEmail']").setValue("piterskiyvv@mail.ru");
-//        $x("//label[@for='gender-radio-1']").click(); // гендер
-//        $x("//input[@placeholder='Mobile Number']").setValue("1234567890");  // номер
-//        $x("//input[@id='subjectsInput']").setValue("Maths").pressEnter();  // предметы
-//        $x("//label[@for='hobbies-checkbox-1']").click();  // хобби
-//        $x("//textarea[@placeholder='Current Address']").setValue("Samara");   // адрес
-//
-//        $x("//input[@id='dateOfBirthInput']").click();
-//        $x("//select[@class='react-datepicker__year-select']").click();
-//        $x("//option[@value='1989']").click();
-//        $x("//select[@class='react-datepicker__month-select']").click();
-//        $x("//option[@value='5']").click();
-//        $x("//div[@class='react-datepicker__day react-datepicker__day--019']").click();
-//
-////      штат и город
-//        $x("//div[@class=' css-1wa3eu0-placeholder']").click();  // клик по кнопке для выпадения
-//        $("#stateCity-wrapper").$(byText("NCR")).click();   // клик по тексту через общий див
-////        $x("(//div[@class=' css-tlfecz-indicatorContainer'])[1]").click();  // как искать через массив элементов?
-////        $x("//div[@id='react-select-3-option-2']").click();
-//        $x("//div[text()='Select City']").click();  // клик по кнопке для выпадения
-//        $x("//div[@id='react-select-4-option-2']").click();   // поиск элемента через заморозку
-//
-//        // вставка файла
-//        $x("//input[@id='uploadPicture']").uploadFromClasspath("img/1.png");
-//
-//        $("#submit").click();     // утверждение
-//
-//        $(".modal-content").should(appear); // перевод-элемент должен появиться
-//        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));  // проверка появления формы
-//
-//        $(".table-responsive").shouldHave(text(userName),text("Shest"),text("piterskiyvv@mail.ru"));  //  проверка заполнения таблицы
-//    }
+    @Test
+    @Tag("remote")
+    public void testLambdaStep(){
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        Configuration.holdBrowserOpen = true;
+
+        step("открываем главную страницу ", () -> {
+            open("https://github.com/");
+        });
+        // тоже самое без лямбды
+//        step("открываем главную страницу ", new Allure.ThrowableRunnableVoid() {
+//            @Override
+//            public void run() throws Throwable {
+//                open("https://github.com/");
+//            }
+//        });
+//        $(withText("#87")).should(Condition.exist);
+        step("ищем репозиторий " + REPOSITORY, () ->{
+            $("[data-target='qbsearch-input.inputButtonText']").click();
+            $("[name='query-builder-test']").sendKeys(REPOSITORY);
+            $("[name='query-builder-test']").submit();
+        });
+        step("Кликаем по ссылке репозитория " + REPOSITORY, () -> {
+            $(linkText(REPOSITORY)).click();
+        });
+        step("Открываем вкладку issues ", () -> {
+            $("#issues-tab").click();
+        });
+        step("Проверка наличия issue с номером 87 ", () -> {
+            $(withText("#87")).should(Condition.exist);
+        });
+    }
 }
