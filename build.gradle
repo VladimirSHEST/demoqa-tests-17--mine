@@ -20,7 +20,7 @@ repositories {
 dependencies {
     testImplementation(
             'org.junit.jupiter:junit-jupiter:5.8.2',       // полный junit
-            'com.codeborne:selenide:7.2.1',
+            'com.codeborne:selenide:6.10.3',
             'org.assertj:assertj-core:3.25.3',             //  чтоб быстрее писать код
             'org.slf4j:slf4j-simple:2.0.6',                //  для лучшей расшифровки кода в run
 
@@ -36,6 +36,7 @@ dependencies {
 
     )
 }
+
 
 test {
     useJUnitPlatform()
@@ -59,6 +60,9 @@ allure {
 test {
     useJUnitPlatform()
 }
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 task simple_test(type: Test) {
     useJUnitPlatform {
@@ -69,6 +73,12 @@ task simple_test(type: Test) {
 task remote_test(type: Test) {
     useJUnitPlatform {
         includeTags("remote")
+    }
+}
+
+task one_property_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("one_property")
     }
 }
 
