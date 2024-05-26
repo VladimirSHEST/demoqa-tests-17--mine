@@ -31,8 +31,19 @@ public class SystemPropertiesTests {
         System.out.println(browserName);
         System.out.println(browserName);
         // gradle clean one_property_test
-        //
+        // firefox
         // gradle clean one_property_test -Dbrowser=safari
+        // safari
     }
 
+    @Test
+    @Tag("hello_test")
+    void systemPropertyTest5(){
+        System.out.println("Hello, " +  System.getProperty("user_name","unknown_student") );
+    }
+    @Test
+    @Tag("my")
+    void  systemPropertyTest6() {
+        System.out.println("Hiiii");
+    }
 }
