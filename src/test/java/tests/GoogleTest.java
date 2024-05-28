@@ -54,6 +54,7 @@ public class GoogleTest {
 
     @Test
     @Tag("remote")
+    @Step("Аннотация Step работает ")
     void openGoogle(){
         step("Открываем сайт", () -> {
             open("https://www.google.ru/?hl=ru");

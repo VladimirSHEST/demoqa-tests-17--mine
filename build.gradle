@@ -34,7 +34,7 @@ dependencies {
 //            'io.qameta.allure:allure-commandline:2.19.0',  // не совместимость
 //            'io.qameta.allure:allure-assertj:3.19.0',       // не совместимость
             'io.qameta.allure:allure-rest-assured:2.19.0',   //для api тестов
-//             'org.aspectj:aspectjweaver:1.9.20'
+             'org.aspectj:aspectjweaver:1.9.20'
 
     )
 }
@@ -74,7 +74,7 @@ task simple_test(type: Test) {
     }
 }
 
-task remote_test(type: Test) {
+tasks.register('remote_test', Test) {
     useJUnitPlatform {
         includeTags("remote")
     }
@@ -98,14 +98,14 @@ task hello_test(type: Test) {
 //    }
 //}
 
-tasks.register('my', Test){
-    useJUnitPlatform{
+tasks.register('my', Test) {
+    useJUnitPlatform {
         includeTags("my")
     }
 }
 
-tasks.register('hello'){
-    doLast{
+tasks.register('hello') {
+    doLast {
         println('world')
     }
 }

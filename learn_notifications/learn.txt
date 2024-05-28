@@ -1,0 +1,7 @@
+Telegram name Отчёты QA
+Telegram user_name @QA_Test_NotificationsQA_bot
+token  6976825420:AAGYJWY7e6jizVEIUyDPD5xtYIl0Q81yX4M
+
+
+
+
