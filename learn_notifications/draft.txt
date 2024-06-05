@@ -1,0 +1,13 @@
+
+Telegram name: Отчёты QA
+Telegram user_name: @QA_Test_NotificationsQA_bot
+Telegram token: 6976825420:AAGYJWY7e6jizVEIUyDPD5xtYIl0Q81yX4M
+Chat id: -4264259241
+
+
+a. Fetch bot updates and look for the chat id:
+curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates | -r '.result[].message.chat.id'
+curl https://api.telegram.org/bot6976825420:AAGYJWY7e6jizVEIUyDPD5xtYIl0Q81yX4M/getUpdates | -r '.result[].message.chat.id'
+
+Send a message using the HTTP API: https://core.telegram.org/bots/api#sendmessage
+curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "123456789", "text": "This is a test from curl", "disable_notification": true}' https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
